@@ -1,0 +1,89 @@
+@keyframes backgroundpan {
+    0% {
+      left: -30%;
+  }
+    50% {
+      left: 0;
+  }
+    100% {
+      left: -30%;
+  }
+}
+body {
+  font-family: "Kanit";
+  text-shadow: 1px 1px 1px black;
+  position: relative;
+  width: 100%;
+  padding:0;
+  margin:0;
+  overflow: hidden;
+  background-color: black;
+}
+#background {
+  background-image: url("https://res.cloudinary.com/dxiqgi3ee/image/upload/v1532803954/war-2721538_1920.jpg");
+  position: absolute;
+  height: 130%;
+  width: 130%;
+  top: -15%;
+  left: -15%;
+  background-size: cover;
+  background-position:center;
+  z-index: -1;
+     animation-name: backgroundpan;
+    animation-duration: 110s;
+  animation-iteration-count: infinite;
+}
+h1,
+h2 {
+  border: solid rgba(104, 134, 161, 0.75);
+  background-color: rgba(104, 134, 161, 0.75);
+  width: 1500px;
+  margin: 100px auto 0px auto;
+  color: white;
+}
+table {
+  border: solid rgba(66, 85, 102, 0.75);
+  background-color: rgba(66, 85, 102, 0.75);
+  width: 1300px;
+  margin: 5px auto 15px auto;
+}
+.team td {
+  vertical-align: top;
+  padding-top: 10px;
+}
+.win {
+  vertical-align: middle !important;
+  padding-top: 0px !important;
+  border: solid rgba(252, 15, 3, 0.75);
+  background: linear-gradient(
+    to bottom left,
+    rgba(230, 220, 3, 0.75),
+    rgba(237, 124, 5, 0.75)
+  );
+  font-weight: bolder;
+  font-size: 20px;
+  color: black;
+  text-shadow: 0px 0px 0px;
+}
+.bestplayer {
+  width: 450px;
+}
+.player {
+  border-bottom: solid 2px white;
+}
+td {
+  color: white;
+}
+.gametype {
+  margin-top: 5px;
+  color: white;
+}
+.taunt {
+  margin-top: 15px;
+  color: red;
+  background-color: rgba(104, 134, 161, 0.89);
+  text-shadow: 1px 1px 0px black;
+}
+.teamrebel td {
+  padding-top: 30px !important;
+}

@@ -4,16 +4,16 @@ import profile from "../../assets/superman/profile.png"
 import Fighting from '../fighting/fighting';
 
 export default function Home() {
-    const [superProgressValue, setSuperProgressValue] = useState(0);
-    const [enmyProgressValue, setEnmyProgressValue] = useState(0);
+    const [superProgressValue, setSuperProgressValue] = useState(100);
+    const [enmyProgressValue, setEnmyProgressValue] = useState(100);
 
     const supermanHanlder = () => {
         const value = 10;
-        setSuperProgressValue(prev => prev === 100 ? 10 : prev + value);
+        setSuperProgressValue(prev => prev === 0 ? 10 : prev - value);
     };
     const enmyhandler = () => {
         const value = 10;
-        setEnmyProgressValue(prev => prev === 100 ? 10 : prev + value);
+        setEnmyProgressValue(prev => prev === 0 ? 10 : prev - value);
     };
 
 
@@ -44,7 +44,7 @@ export default function Home() {
                     </div>
                 </div>
             </div>
-            <Fighting />
+            <Fighting setSuperProgressValue={supermanHanlder} setEnmyProgressValue={enmyhandler} />
         </div>
     );
 }

@@ -2,12 +2,15 @@ import "./fighting.css";
 import superman from "../../assets/superman/waiting-for-fighting.webp";
 import supermanRun from "../../assets/superman/running.gif";
 import supermanPunch from "../../assets/superman/superman-righthand-punch.webp";
+import supermanJump from "../../assets/superman/super-jump.webp";
 import batman from "../../assets/superman/batman.webp";
 import batmanRunning from "../../assets/superman/batman-running.gif";
 import batmanFighting from "../../assets/superman/batman-fighting.gif";
+import batmanJump from "../../assets/superman/batman-jump.gif";
 import { useState, useEffect } from "react";
 
-export default function Fighting(setSuperProgressValue, setEnmyProgressValue) {
+// eslint-disable-next-line react/prop-types
+export default function Fighting({ setSuperProgressValue, setEnmyProgressValue }) {
   const [positionSuperman, setPositionSuperman] = useState({ x: 0, y: 0 });
   const [positionBatman, setPositionBatman] = useState({ x: 300, y: 0 }); // Start Batman at a different position
   const [imageSuperman, setImageSuperman] = useState(superman);
@@ -15,6 +18,8 @@ export default function Fighting(setSuperProgressValue, setEnmyProgressValue) {
   const [isFlippedSuperman, setIsFlippedSuperman] = useState(false);
   const [isFlippedBatman, setIsFlippedBatman] = useState(false);
   const [collision, setCollision] = useState(false);
+  const [superWin, setSuperWin] = useState(false);
+  const [batWin, setBatWin] = useState(false);
 
   // Function to check if two rectangles overlap
   const isCollision = (pos1, size1, pos2, size2) => {
@@ -26,17 +31,32 @@ export default function Fighting(setSuperProgressValue, setEnmyProgressValue) {
     );
   };
 
+  if (superWin) {
+    console.log("superman win the game");
+  }
+  if (batWin) {
+    console.log("batman win the game");
+  }
   // Check collision after every movement
   useEffect(() => {
     const sizeSuperman = { width: 200, height: 300 };
     const sizeBatman = { width: 200, height: 300 };
-    if (isCollision(positionSuperman, sizeSuperman, positionBatman, sizeBatman)) {
-      imageBatman === "/src/assets/superman/batman-fighting.gif" ?
-        setSuperProgressValue() : imageSuperman === "/src/assets/superman/superman-righthand-punch.webp" ? setEnmyProgressValue() : console.log("no one hit");
-      setCollision(true);
-      setEnmyProgressValue(20)
-    } else {
-      setCollision(false);
+    if (imageSuperman === "/src/assets/superman/superman-righthand-punch.webp") {
+
+      if (isCollision(positionSuperman, sizeSuperman, positionBatman, sizeBatman)) {
+        setEnmyProgressValue(prev => prev === 0 ? setSuperWin(true) : prev - 10);
+        setCollision(true);
+      } else {
+        setCollision(false);
+      }
+    }
+    else if (imageBatman === "/src/assets/superman/batman-fighting.gif") {
+      if (isCollision(positionSuperman, sizeSuperman, positionBatman, sizeBatman)) {
+        setSuperProgressValue(prev => prev === 0 ? setBatWin(true) : prev - 10);
+        setCollision(true);
+      } else {
+        setCollision(false);
+      }
     }
   }, [positionSuperman, positionBatman, imageBatman, imageSuperman, setSuperProgressValue, setEnmyProgressValue]);
 
@@ -45,11 +65,12 @@ export default function Fighting(setSuperProgressValue, setEnmyProgressValue) {
     const handleSupermanKeyDown = (ev) => {
       const dir = ev.key.replace('Arrow', '');
 
+
       if (ev.key === " ") {
         setImageSuperman(supermanPunch);
       }
 
-      if (!["Left", "Right", "Up", "Down"].includes(dir)) return;
+      if (!["Left", "Right", "Up", "Down", "z"].includes(dir)) return;
 
       setPositionSuperman((prevPosition) => {
         switch (dir) {
@@ -85,6 +106,53 @@ export default function Fighting(setSuperProgressValue, setEnmyProgressValue) {
       document.removeEventListener("keyup", handleSupermanKeyUp);
     };
   }, []);
+  useEffect(() => {
+    const handleSupermanKeyPress = (ev) => {
+      const dir = ev.key;
+      if (dir === "z") {
+
+        setPositionSuperman((prevPosition) => ({
+          ...prevPosition,
+          y: prevPosition.y - 80,
+        }));
+        setImageSuperman(supermanJump);
+
+        setTimeout(() => {
+          setPositionSuperman((prevPosition) => ({
+            ...prevPosition,
+            y: prevPosition.y + 80,
+          }));
+        }, 200);
+      }
+      if (dir === "q") {
+
+        setPositionBatman((prevPosition) => ({
+          ...prevPosition,
+          y: prevPosition.y - 80,
+        }));
+        setImageBatman(batmanJump);
+
+        setTimeout(() => {
+          setPositionBatman((prevPosition) => ({
+            ...prevPosition,
+            y: prevPosition.y + 80,
+          }));
+        }, 200);
+      }
+    };
+
+    document.addEventListener("keydown", handleSupermanKeyPress);
+
+    // Clean up the event listener on component unmount
+    return () => {
+      setImageSuperman(superman); // Change back to the original image
+      setImageBatman(batman); // Change back to the original image
+      document.removeEventListener("keydown", handleSupermanKeyPress);
+    };
+  }, []);
+
+
+
 
   // Handle Batman's movement and actions
   useEffect(() => {
@@ -95,7 +163,7 @@ export default function Fighting(setSuperProgressValue, setEnmyProgressValue) {
         setImageBatman(batmanFighting);
       }
 
-      if (!["a", "d", "w", "s"].includes(dir)) return;
+      if (!["a", "d", "w", "s",].includes(dir)) return;
 
       setPositionBatman((prevPosition) => {
         switch (dir) {
@@ -113,6 +181,7 @@ export default function Fighting(setSuperProgressValue, setEnmyProgressValue) {
           case "s":
             setImageBatman(batmanRunning);
             return { ...prevPosition, y: prevPosition.y + 10 };
+
           default:
             return prevPosition;
         }
@@ -142,7 +211,7 @@ export default function Fighting(setSuperProgressValue, setEnmyProgressValue) {
           alt="Superman"
           style={{
             width: "200px", height: "300px",
-            transform: `translate(${positionSuperman.x}px, ${positionSuperman.y}px) scaleX(${isFlippedSuperman ? -1 : 1})`,
+            transform: `translate(${positionSuperman.x}px, ${positionSuperman.y}px) scaleX(${isFlippedSuperman ? -1 : 1}) `,
           }}
         />
         <img

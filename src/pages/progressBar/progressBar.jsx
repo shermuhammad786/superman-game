@@ -7,16 +7,6 @@ export default function Home() {
     const [superProgressValue, setSuperProgressValue] = useState(100);
     const [enmyProgressValue, setEnmyProgressValue] = useState(100);
 
-    const supermanHanlder = () => {
-        const value = 10;
-        setSuperProgressValue(prev => prev === 0 ? 10 : prev - value);
-    };
-    const enmyhandler = () => {
-        const value = 10;
-        setEnmyProgressValue(prev => prev === 0 ? 10 : prev - value);
-    };
-
-
     return (
         <div className='battle'>
             <div className="flex flex-wrap justify-around items-center">
@@ -24,7 +14,7 @@ export default function Home() {
                     <h1>SUPER MAN</h1>
                     <div className='flex'>
                         <img src={profile} className='profile' alt="" />
-                        <div className="progress" onClick={supermanHanlder} style={{ "--progress": `${superProgressValue}%` }}>
+                        <div className="progress" style={{ "--progress": `${superProgressValue}%` }}>
                             <div className="bar">
                                 <div className="progress-value"></div>
                             </div>
@@ -36,7 +26,7 @@ export default function Home() {
                     <h1>SUPER STAR</h1>
                     <div className='flex'>
                         <img src={profile} className='profile' alt="" />
-                        <div className="progress" onClick={enmyhandler} style={{ "--progress": `${enmyProgressValue}%` }}>
+                        <div className="progress" style={{ "--progress": `${enmyProgressValue}%` }}>
                             <div className="bar">
                                 <div className="progress-value"></div>
                             </div>
@@ -44,7 +34,7 @@ export default function Home() {
                     </div>
                 </div>
             </div>
-            <Fighting setSuperProgressValue={supermanHanlder} setEnmyProgressValue={enmyhandler} />
+            <Fighting setSuperProgressValue={setSuperProgressValue} setEnmyProgressValue={setEnmyProgressValue} />
         </div>
     );
 }

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import "./progressBar.css";
 import profile from "../../assets/superman/profile.png"
+import batmanProfile from "../../assets/superman/batman-profile.png"
 import Fighting from '../fighting/fighting';
 
 export default function Home() {
@@ -13,7 +14,7 @@ export default function Home() {
                 <div className='flex flex-wrap flex-col justify-between items-center'>
                     <h1>SUPER MAN</h1>
                     <div className='flex'>
-                        <img src={profile} className='profile' alt="" />
+                        <img src={profile} className='profile-super' alt="" />
                         <div className="progress" style={{ "--progress": `${superProgressValue}%` }}>
                             <div className="bar">
                                 <div className="progress-value"></div>
@@ -23,9 +24,9 @@ export default function Home() {
                 </div>
                 <div>Score</div>
                 <div className='flex flex-wrap flex-col justify-between items-center'>
-                    <h1>SUPER STAR</h1>
+                    <h1>BATMAN</h1>
                     <div className='flex'>
-                        <img src={profile} className='profile' alt="" />
+                        <img src={batmanProfile} className='profile-bat' alt="" />
                         <div className="progress" style={{ "--progress": `${enmyProgressValue}%` }}>
                             <div className="bar">
                                 <div className="progress-value"></div>

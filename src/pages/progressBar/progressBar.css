@@ -42,7 +42,11 @@
   0%, 100% { box-shadow: 0 0 10px 0px orange; }
   50% { box-shadow: 0 0 15px 5px orange; }
 }
-.profile{
+.profile-super{
     width: 50px;
     border-radius: 50%;
+}
+.profile-bat{
+  width: 60px;
+  
 }

@@ -8,6 +8,7 @@ import batmanRunning from "../../assets/superman/batman-running.gif";
 import batmanFighting from "../../assets/superman/batman-fighting.gif";
 import batmanJump from "../../assets/superman/batman-jump.gif";
 import { useState, useEffect } from "react";
+import Winner from "./winner";
 
 // eslint-disable-next-line react/prop-types
 export default function Fighting({ setSuperProgressValue, setEnmyProgressValue }) {
@@ -21,8 +22,22 @@ export default function Fighting({ setSuperProgressValue, setEnmyProgressValue }
   const [superWin, setSuperWin] = useState(false);
   const [batWin, setBatWin] = useState(false);
 
+
+
+
+  // console.log('sizeSuperman: ', sizeSuperman);
+  // console.log('positionSuperman: ', positionSuperman);
+  // console.log('sizeBatman: ', sizeBatman);
+  // console.log('positionBatman: ', positionBatman);
+
+
   // Function to check if two rectangles overlap
   const isCollision = (pos1, size1, pos2, size2) => {
+
+    // console.log('pos1.x < pos2.x + size2.width: ', pos1.x < pos2.x + size2.width);
+    // console.log('pos1.x + size1.width > pos2.x: ', pos1.x + size1.width > pos2.x);
+    // console.log('pos1.y < pos2.y + size2.height: ', pos1.y < pos2.y + size2.height);
+    // console.log('pos1.y + size1.height > pos2.y: ', pos1.y + size1.height > pos2.y);
     return (
       pos1.x < pos2.x + size2.width &&
       pos1.x + size1.width > pos2.x &&
@@ -40,9 +55,15 @@ export default function Fighting({ setSuperProgressValue, setEnmyProgressValue }
   // Check collision after every movement
   useEffect(() => {
     const sizeSuperman = { width: 200, height: 300 };
+    // console.log('sizeSuperman: ', sizeSuperman, "sizeBatman:", sizeBatman);
     const sizeBatman = { width: 200, height: 300 };
+    // console.log(positionSuperman, sizeSuperman, positionBatman, sizeBatman);
     if (imageSuperman === "/src/assets/superman/superman-righthand-punch.webp") {
 
+      // const newPositionBatman = { ...positionBatman, x: positionBatman.x + 10 };
+      // setPositionBatman(newPositionBatman);
+
+      // console.log(isCollision(positionSuperman, sizeSuperman, positionBatman, sizeBatman), " ==>>> collied");
       if (isCollision(positionSuperman, sizeSuperman, positionBatman, sizeBatman)) {
         setEnmyProgressValue(prev => prev === 0 ? setSuperWin(true) : prev - 10);
         setCollision(true);
@@ -52,6 +73,11 @@ export default function Fighting({ setSuperProgressValue, setEnmyProgressValue }
     }
     else if (imageBatman === "/src/assets/superman/batman-fighting.gif") {
       if (isCollision(positionSuperman, sizeSuperman, positionBatman, sizeBatman)) {
+        // const newPositionSuperman = { ...positionSuperman, x: positionSuperman.x - 10 };
+        // setPositionSuperman(newPositionSuperman);
+
+
+
         setSuperProgressValue(prev => prev === 0 ? setBatWin(true) : prev - 10);
         setCollision(true);
       } else {
@@ -224,6 +250,8 @@ export default function Fighting({ setSuperProgressValue, setEnmyProgressValue }
           }}
         />
       </div>
+      {batWin && < Winner winnder="BATMAN" /> || superWin && <Winner winnder="SUPERMAN" />}
     </div>
+
   );
 }

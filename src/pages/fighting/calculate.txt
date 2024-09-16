@@ -1,0 +1,63 @@
+sizeSuperman:          {width: 200, height: 300}
+sizeBatman:            {width: 200, height: 300}
+positionSuperman:      {x: 120, y: 320}
+positionBatman:        {x: 300, y: 0}
+
+
+sup
+120 + 200 = 320
+230 + 300 = 530
+		320 less 500
+		530 great 300
+bat
+300 + 200 = 500
+0 + 300 = 300
+
+
+
+
+sizeSuperman:       {width: 200, height: 300}
+sizeBatman:         {width: 200, height: 300}
+positionSuperman:   {x: 120, y: -160}
+positionBatman:     {x: 290, y: -430}
+
+sup
+120 + 200 = 320
+-160 + 300 = 140
+		320 less 940
+		140 great -130
+bat
+290 + 200 = 940
+-430 + 300 = -130
+
+
+sizeSuperman:      {width: 200, height: 300}
+sizeBatman:        {width: 200, height: 300}
+positionSuperman:  {x: 750, y: 200}
+positionBatman:    {x: 610, y: -130}
+
+sup 
+750 - 200 = 550
+200 + 300 500
+		550 less 810
+		500 great 170
+bat
+610 + 200 = 810
+-130 + 300 = 170
+ 
+
+
+sizeSuperman:        {width: 200, height: 300}
+positionSuperman:    {x: -80, y: 210}
+sizeBatman:          {width: 200, height: 300}
+positionBatman:      {x: 50, y: -100}
+
+
+sup
+-80 + 200 = 120
+210 + 300 = 510
+       		120 less 250
+		510 great 200
+bat
+50 + 200 = 250
+-100 + 300 = 200
